@@ -16,6 +16,15 @@ pipeline {
                 sh 'mvn package'
             }
         }
+    }
 
+    post {
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        }
+
+        failure {
+            echo 'I failed :('
+        }
     }
 }
